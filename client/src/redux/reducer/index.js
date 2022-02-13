@@ -31,9 +31,10 @@ const rootReducer = (state = initialState, action) => {
         pokemons: [action.payload],
       };
     case GET_DETAILS:
+      console.log("reducer id", action.payload);
       return {
         ...state,
-        pokemonDetail: action.payload,
+        detail: action.payload,
       };
     case GET_TYPES:
       return {
