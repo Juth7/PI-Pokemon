@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import Logo from "../../img/Logo.png";
 import { getNames } from "../../redux/actions";
+import s from "./NavBar.module.css";
 
 function NavBar() {
   const dispatch = useDispatch();
@@ -21,23 +22,24 @@ function NavBar() {
   };
 
   return (
-    <div className="navbar">
-      <div className="titleNav">
+    <div className={s.navBar}>
+      <div className={s.logo}>
         <Link to="/">
-          <img src={Logo} alt="" height="60px" width="170px" />
+          <img src={Logo} alt="" height="150px" width="150px" />
         </Link>
       </div>
       {/* BUSCAR POKEMON */}
-      <label>Search</label>
+      <label className={s.search}>Search</label>
       <form onSubmit={handleSubmit}>
         <input
+          className={s.bar}
           type="text"
-          placeholder="Type a Pokemon here..."
+          placeholder="    Type a Pokemon here..."
           value={input}
           onChange={handleInput}
         />
       </form>
-      <div>
+      <div className={s.home}>
         <Link to="/home">Home</Link>
       </div>
     </div>

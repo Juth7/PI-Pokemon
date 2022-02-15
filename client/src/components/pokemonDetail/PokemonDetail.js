@@ -33,7 +33,7 @@ export default function CreatePokemon() {
             ))}
           </div>
           <div id="hp">
-            HP: <progress id="hp" max="200" value={pokemonDetail.hp} />{" "}
+            HP: <progress id="hp" max="255" value={pokemonDetail.hp} />{" "}
             {pokemonDetail.hp}
           </div>
           <div id="attack">
@@ -42,19 +42,19 @@ export default function CreatePokemon() {
           </div>
           <div id="defense">
             Defense:{" "}
-            <progress id="hp" max="200" value={pokemonDetail.defense} />{" "}
+            <progress id="hp" max="250" value={pokemonDetail.defense} />{" "}
             {pokemonDetail.defense}
           </div>
           <div id="height">
-            Heigth: <progress id="hp" max="200" value={pokemonDetail.height} />{" "}
+            Heigth: <progress id="hp" max="20" value={pokemonDetail.height} />{" "}
             {pokemonDetail.height}
           </div>
           <div id="weight">
-            Weight: <progress id="hp" max="200" value={pokemonDetail.weight} />{" "}
+            Weight: <progress id="hp" max="2000" value={pokemonDetail.weight} />{" "}
             {pokemonDetail.weight}
           </div>
           <div id="speed">
-            Speed: <progress id="hp" max="200" value={pokemonDetail.speed} />{" "}
+            Speed: <progress id="hp" max="180" value={pokemonDetail.speed} />{" "}
             {pokemonDetail.speed}
           </div>
         </div>
