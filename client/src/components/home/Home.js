@@ -12,7 +12,7 @@ import {
 import PokemonCard from "../pokemonCard/PokemonCard";
 import Pagination from "../pagination/Pagination";
 import Loader from "../../img/Charizard.gif";
-import icon from "../../img/IconPoke.png";
+import icon from "../../img/PokeBall.gif";
 import NavBar from "../navBar/NavBar";
 import s from "./Home.module.css";
 
@@ -22,7 +22,7 @@ export default function Home() {
   const types = useSelector((state) => state.types);
   const [order, setOrder] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
-  const [pokemonsPerPage, setPokemonsPerPage] = useState(3); //CORREGIR LA CANTIDAD DE POKEMONES EN EL PAGINADO
+  const [pokemonsPerPage, setPokemonsPerPage] = useState(12); //CORREGIR LA CANTIDAD DE POKEMONES EN EL PAGINADO
   const endPokemon = currentPage * pokemonsPerPage; //indice del ultimo pokemon
   const startPokemon = endPokemon - pokemonsPerPage; //indice del primer pokemon
   const currentPokemons = pokemons?.slice(startPokemon, endPokemon); //rango de pokemones en que estamos
@@ -67,65 +67,73 @@ export default function Home() {
   return (
     <div className={s.home}>
       <NavBar />
-      {/* CREAR POKEMON */}
-      <button className={s.btnCreate}>
-        <Link to="/create">Create Pokemon</Link>
-      </button>
-      {/* FILTROS Y ORDENAMIENTO  */}
-
-      <div className={s.filters}>
-        <select className={s.selector} onChange={handleTypesFilter}>
-          <option value="All">Filter Types</option>
-          {types?.map((t) => {
-            return (
-              <option key={t.name} value={t.name}>
-                {t.name.toUpperCase()}
-              </option>
-            );
-          })}
-        </select>
-        <select className={s.selector} onChange={handleCreationFilter}>
-          <option value="All">Filter By Creation</option>
-          <option value="CreatedByUser">Created By User</option>
-          <option value="Existing">Existing</option>
-        </select>
-        <select className={s.selector} onChange={handleOrder}>
-          <option value="All">Order By Name</option>
-          <option value="asc">Order A-Z</option>
-          <option value="desc">Order Z-A</option>
-        </select>
-        <select className={s.selector} onChange={handleAttack}>
-          <option value="All">Order By Attack</option>
-          <option value="max">Attack Max/Min</option>
-          <option value="min">Attack Min/Max</option>
-        </select>
+      <div className={s.creation}>
+        {/* CREAR POKEMON */}
+        <Link to="/create" type="button" className={s.btnCreate}>
+          Create Pokémon
+        </Link>
         <button className={s.btnReload} onClick={handleClick}>
-          <img src={icon} alt="Reload" width="18px" />
+          {/* Reload */}
+          <img src={icon} alt="Reload" width="45px" />
         </button>
       </div>
-      {/* RENDERIZADO DE TODAS LAS CARD DE POKEMON */}
-      {}
-      <div className={s.Cards}>
-        {!currentPokemons.length ? (
+      {/* FILTROS Y ORDENAMIENTO  */}
+      <div className={s.content}>
+        <div className={s.filters}>
+          <select className={s.selector} onChange={handleTypesFilter}>
+            <option value="All">Filter Types</option>
+            {types?.map((t) => {
+              return (
+                <option key={t.name} value={t.name}>
+                  {t.name.toUpperCase()}
+                </option>
+              );
+            })}
+          </select>
+          <select className={s.selector} onChange={handleCreationFilter}>
+            <option value="All">Filter By Creation</option>
+            <option value="CreatedByUser">Created By User</option>
+            <option value="Existing">Existing</option>
+          </select>{" "}
+        </div>
+
+        {/* RENDERIZADO DE TODAS LAS CARD DE POKEMON */}
+
+        {currentPokemons.length ? (
+          <div className={s.cards}>
+            {currentPokemons?.map((p) => (
+              <div className={s.card}>
+                <PokemonCard
+                  key={p.id}
+                  name={p.name}
+                  img={p.img}
+                  type={p.type}
+                  id={p.id}
+                />
+              </div>
+            ))}
+          </div>
+        ) : (
           <img
             className={s.loader}
             src={Loader}
-            alt=""
-            width="150px"
-            height="150px"
+            alt="Loading..."
+            width="300px"
+            height="300px"
           />
-        ) : (
-          currentPokemons?.map((p) => (
-            <PokemonCard
-              className={s.card}
-              key={p.id}
-              name={p.name}
-              img={p.img}
-              type={p.type}
-              id={p.id}
-            />
-          ))
         )}
+        <div className={s.ordering}>
+          <select className={s.selector} onChange={handleOrder}>
+            <option value="All">Order By Name</option>
+            <option value="asc">Order A-Z</option>
+            <option value="desc">Order Z-A</option>
+          </select>
+          <select className={s.selector} onChange={handleAttack}>
+            <option value="All">Order By Attack</option>
+            <option value="max">Attack Max/Min</option>
+            <option value="min">Attack Min/Max</option>
+          </select>
+        </div>
       </div>
       <div className={s.pagination}>
         <Pagination
