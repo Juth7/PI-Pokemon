@@ -13,9 +13,8 @@ html body {
   display: flex;
   justify-content: center;
   margin-top: 3rem;
-  margin-left: 2.5rem;
+  margin-left: 4rem;
 }
-
 .btnReload {
   background: transparent;
   border: none;
@@ -75,7 +74,8 @@ html body {
 }
 
 .selector {
-  color: rgba(252, 234, 212, 0.925);
+  color: rgba(167, 101, 73, 0.925);
+  text-shadow: 0 0 1px rgba(235, 185, 169, 0.479);
   width: 9rem;
   height: 2.2rem;
   background: linear-gradient(
@@ -99,23 +99,14 @@ html body {
 }
 
 .card {
-  width: 15vw;
-  height: 20vw;
+  width: 15rem;
+  height: 20rem;
   border-radius: 10px;
   background: linear-gradient(
     180deg,
     rgba(254, 174, 77, 0.548) 0%,
     rgba(255, 255, 255, 0) 100%
   );
-  /* border: 2px solid rgba(6, 79, 66, 0.5); */
   backdrop-filter: blur(5px);
   box-shadow: 0px 0px 8px 2px rgba(63, 18, 15, 0.774);
-}
-
-.pagination {
-  width: 17px;
-  height: 15px;
-
-  background: rgba(208, 165, 165, 0.51);
-  border-radius: 3px;
 }

@@ -100,19 +100,23 @@ export default function Home() {
         {/* RENDERIZADO DE TODAS LAS CARD DE POKEMON */}
 
         {currentPokemons.length ? (
-          <div className={s.cards}>
-            {currentPokemons?.map((p) => (
-              <div className={s.card}>
-                <PokemonCard
-                  key={p.id}
-                  name={p.name}
-                  img={p.img}
-                  type={p.type}
-                  id={p.id}
-                />
-              </div>
-            ))}
-          </div>
+          typeof currentPokemons === "object" ? (
+            <div className={s.cards}>
+              {currentPokemons?.map((p) => (
+                <div className={s.card}>
+                  <PokemonCard
+                    key={p.id}
+                    name={p.name}
+                    img={p.img}
+                    type={p.type}
+                    id={p.id}
+                  />
+                </div>
+              ))}
+            </div>
+          ) : (
+            <p>Pokemon Not Found</p>
+          )
         ) : (
           <img
             className={s.loader}
@@ -135,13 +139,12 @@ export default function Home() {
           </select>
         </div>
       </div>
-      <div className={s.pagination}>
-        <Pagination
-          pokemonsPerPage={pokemonsPerPage}
-          pokemons={pokemons.length}
-          pagination={pagination}
-        />
-      </div>
+
+      <Pagination
+        pokemonsPerPage={pokemonsPerPage}
+        pokemons={pokemons.length}
+        pagination={pagination}
+      />
     </div>
   );
 }

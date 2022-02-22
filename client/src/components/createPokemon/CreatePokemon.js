@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { addPokemon, getTypes } from "../../redux/actions";
-import styles from "./CreatePokemon.module.css";
+import NavBar from "../navBar/NavBar";
+import s from "./CreatePokemon.module.css";
 
 export default function CreatePokemon() {
   const dispatch = useDispatch();
@@ -130,147 +131,162 @@ export default function CreatePokemon() {
   }, [dispatch]);
 
   return (
-    <div>
-      <form
-        onSubmit={(e) => {
-          handleSubmit(e);
-        }}
-      >
-        <h2>Create a Pokémon!</h2>
-        <div>
+    <>
+      <NavBar />
+      <div className={s.form}>
+        <form
+          onSubmit={(e) => {
+            handleSubmit(e);
+          }}
+        >
+          <h2 className={s.title}>Create a Pokémon!</h2>
           <div>
-            <label>Name: </label>
-            <input
-              type="text"
-              value={input.name}
-              name="name"
-              onChange={(e) => {
-                handleChange(e);
-              }}
-              placeholder="Name"
-            />
-            <p>{errors.name}</p>
-            <label>Image: </label>
-            <input
-              value={input.img}
-              name="img"
-              onChange={(e) => {
-                handleChange(e);
-              }}
-              placeholder="URL Image..."
-            />
-            <p>{errors.img}</p>
-            <label>HP: </label>
-            <input
-              type="number"
-              value={input.hp}
-              name="hp"
-              onChange={(e) => {
-                handleChange(e);
-              }}
-              placeholder="HP"
-            />
-            {input.hp}
-            <p>{errors.hp}</p>
-            <label>Attack: </label>
-            <input
-              type="number"
-              value={input.attack}
-              name="attack"
-              onChange={(e) => {
-                handleChange(e);
-              }}
-              placeholder="Attack"
-            />
-            {input.attack}
-            <p>{errors.attack}</p>
-            <label>Defense: </label>
-            <input
-              type="number"
-              value={input.defense}
-              name="defense"
-              onChange={(e) => {
-                handleChange(e);
-              }}
-              placeholder="Defense"
-            />
-            {input.defense}
-            <p>{errors.defense}</p>
+            <div>
+              <label>Name: </label>
+              <input
+                type="text"
+                value={input.name}
+                name="name"
+                onChange={(e) => {
+                  handleChange(e);
+                }}
+                placeholder=" Name..."
+                className={s.fields}
+              />
+              <p>{errors.name}</p>
+              <label>Image: </label>
+              <input
+                value={input.img}
+                name="img"
+                onChange={(e) => {
+                  handleChange(e);
+                }}
+                placeholder=" URL Image..."
+                className={s.fields}
+              />
+              <p>{errors.img}</p>
+              <label>HP: </label>
+              <input
+                type="number"
+                value={input.hp}
+                name="hp"
+                onChange={(e) => {
+                  handleChange(e);
+                }}
+                placeholder=" HP..."
+                className={s.fields}
+              />
+              {input.hp}
+              <p>{errors.hp}</p>
+              <label>Attack: </label>
+              <input
+                type="number"
+                value={input.attack}
+                name="attack"
+                onChange={(e) => {
+                  handleChange(e);
+                }}
+                placeholder=" Attack..."
+                className={s.fields}
+              />
+              {input.attack}
+              <p>{errors.attack}</p>
+              <label>Defense: </label>
+              <input
+                type="number"
+                value={input.defense}
+                name="defense"
+                onChange={(e) => {
+                  handleChange(e);
+                }}
+                placeholder=" Defense..."
+                className={s.fields}
+              />
+              {input.defense}
+              <p>{errors.defense}</p>
+            </div>
+            <div>
+              <label>Speed: </label>
+              <input
+                type="number"
+                value={input.speed}
+                name="speed"
+                onChange={(e) => {
+                  handleChange(e);
+                }}
+                placeholder=" Speed..."
+                className={s.fields}
+              />
+              {input.speed}
+              <p>{errors.speed}</p>
+              <label>Height: </label>
+              <input
+                type="number"
+                value={input.height}
+                name="height"
+                onChange={(e) => {
+                  handleChange(e);
+                }}
+                placeholder=" Height..."
+                className={s.fields}
+              />
+              {input.height}
+              <p>{errors.height}</p>
+              <label>Weight: </label>
+              <input
+                type="number"
+                value={input.weight}
+                name="weight"
+                onChange={(e) => {
+                  handleChange(e);
+                }}
+                placeholder=" Weight..."
+                className={s.fields}
+              />
+              {input.weight}
+              <p>{errors.weight}</p>
+            </div>
           </div>
           <div>
-            <label>Speed: </label>
-            <input
-              type="number"
-              value={input.speed}
-              name="speed"
+            <select
               onChange={(e) => {
-                handleChange(e);
+                handleSelect(e);
               }}
-              placeholder="Speed"
-            />
-            {input.speed}
-            <p>{errors.speed}</p>
-            <label>Height: </label>
-            <input
-              type="number"
-              value={input.height}
-              name="height"
-              onChange={(e) => {
-                handleChange(e);
-              }}
-              placeholder="Height"
-            />
-            {input.height}
-            <p>{errors.height}</p>
-            <label>Weight: </label>
-            <input
-              type="number"
-              value={input.weight}
-              name="weight"
-              onChange={(e) => {
-                handleChange(e);
-              }}
-              placeholder="Weight"
-            />
-            {input.weight}
-            <p>{errors.weight}</p>
+              className={s.selector}
+            >
+              <option>Select type</option>
+              {types?.map((e) => {
+                return (
+                  <option key={e.id} value={e.name}>
+                    {e.name}
+                  </option>
+                );
+              })}
+            </select>
+            <p>{errors.types}</p>
+            {
+              input.types.map((e) => {
+                return (
+                  <div key={e}>
+                    <p>{e}</p>
+                    <button
+                      onClick={() => {
+                        handleDelete(e);
+                      }}
+                      className={s.btn}
+                    >
+                      x
+                    </button>
+                  </div>
+                );
+              }) //para poder ver que fui seleccionando
+            }
           </div>
-        </div>
-        <div>
-          <select
-            onChange={(e) => {
-              handleSelect(e);
-            }}
-          >
-            <option>Select type</option>
-            {types?.map((e) => {
-              return (
-                <option key={e.id} value={e.name}>
-                  {e.name}
-                </option>
-              );
-            })}
-          </select>
-          <p>{errors.types}</p>
-          {
-            input.types.map((e) => {
-              return (
-                <div key={e}>
-                  <p>{e}</p>
-                  <button
-                    onClick={() => {
-                      handleDelete(e);
-                    }}
-                  >
-                    x
-                  </button>
-                </div>
-              );
-            }) //para poder ver que fui seleccionando
-          }
-        </div>
-        <button type="submit">Create</button>
-      </form>
-    </div>
+          <button type="submit" className={s.btn}>
+            Create
+          </button>
+        </form>
+      </div>
+    </>
   );
 }

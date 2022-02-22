@@ -1,0 +1,23 @@
+.detailCard {
+  text-transform: capitalize;
+  background: linear-gradient(
+    180deg,
+    rgba(121, 110, 102, 0.438) 0%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  border: 1px solid rgb(161, 91, 58);
+  border-radius: 2rem;
+  margin: 10% auto;
+  padding-bottom: 3rem;
+  width: 30rem;
+  box-shadow: 0 0 1rem 0.5rem rgba(255, 153, 0, 0.432);
+  color: #ffeabed0;
+}
+.name {
+  margin-top: 3rem;
+}
+
+.types {
+  display: flex;
+  justify-content: space-evenly;
+}

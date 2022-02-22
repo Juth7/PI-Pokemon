@@ -1,0 +1,62 @@
+.form {
+  background: linear-gradient(
+    180deg,
+    rgba(190, 147, 116, 0.603) 0%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  border: 1px solid rgb(161, 91, 58);
+  border-radius: 2rem;
+  margin: 10% auto;
+  padding-bottom: 3rem;
+  width: 28rem;
+  box-shadow: 0 0 1rem 0.5rem rgba(185, 71, 56, 0.705);
+  color: #ffeabed0;
+  font-family: "Courier New";
+  font-weight: bold;
+}
+
+.title {
+  margin-top: 3rem;
+  color: rgb(248, 189, 140);
+  text-shadow: 0 0 0.75rem rgb(70, 33, 11);
+}
+.fields {
+  background: rgba(60, 20, 18, 0.5);
+  box-shadow: 0px 0px 4px rgba(240, 204, 204, 0.25),
+    inset 0px 0px 20px 5px rgba(108, 96, 96, 0.81);
+  border-radius: 15px;
+  border-color: rgb(187, 100, 85);
+  color: rgba(243, 226, 181, 0.877);
+}
+.fields::placeholder {
+  color: rgba(243, 247, 212, 0.253);
+}
+.selector {
+  margin-top: 1.5rem;
+  background: linear-gradient(
+    180deg,
+    rgba(165, 58, 16, 0.747) 0%,
+    rgba(95, 79, 27, 0.062) 100%
+  );
+  border: 2px solid rgba(53, 26, 24, 0.6);
+  filter: drop-shadow(0px 0px 6px rgba(0, 0, 0, 0.25));
+  border-radius: 20px;
+  color: rgb(197, 121, 89);
+  text-shadow: 0 0 1px rgba(235, 185, 169, 0.479);
+  width: fit-content;
+  padding: 0.25rem;
+}
+.btn {
+  margin-top: 4rem;
+  background: linear-gradient(
+    180deg,
+    rgba(244, 82, 71, 0.32) 18.57%,
+    rgba(107, 89, 25, 0.103) 100%
+  );
+  border-color: rgba(151, 90, 34, 0.589);
+  box-shadow: 0px 0px 20px 4px rgba(95, 20, 20, 0.5);
+  border-radius: 20px;
+  color: rgba(255, 235, 205, 0.616);
+  width: fit-content;
+  padding: 0.25rem 1rem;
+}

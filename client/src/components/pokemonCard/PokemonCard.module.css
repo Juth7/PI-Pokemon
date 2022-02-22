@@ -1,0 +1,14 @@
+.cardDet {
+  text-decoration: none;
+  font-size: medium;
+  color: rgb(250, 231, 169);
+  text-shadow: 0 0 8px rgb(104, 24, 24);
+}
+.types {
+  margin-left: 0.75rem;
+  font-size: 0.8rem;
+  padding: 0.25rem 0.9rem;
+  border: 1.5px solid rgb(131, 56, 56);
+  border-radius: 15px;
+  background-color: rgba(192, 72, 16, 0.288);
+}

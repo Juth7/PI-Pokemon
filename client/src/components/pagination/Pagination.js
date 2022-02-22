@@ -1,4 +1,5 @@
 import React from "react";
+import s from "./Pagination.module.css";
 
 export default function Pagination({ pokemonsPerPage, pokemons, pagination }) {
   const pages = [];
@@ -10,13 +11,11 @@ export default function Pagination({ pokemonsPerPage, pokemons, pagination }) {
 
   return (
     <div>
-      <ul>
-        {pages?.map((e) => (
-          <button key={e} onClick={() => pagination(e)}>
-            {e}
-          </button>
-        ))}
-      </ul>
+      {pages?.map((e) => (
+        <button className={s.pagination} key={e} onClick={() => pagination(e)}>
+          {e}
+        </button>
+      ))}
     </div>
   );
 }

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import Logo from "../../img/Logo.png";
-import homeImg from "../../img/IconPoke.png";
+import homeImg from "../../img/PokeBlue.png";
 import { getNames } from "../../redux/actions";
 import s from "./NavBar.module.css";
 
@@ -44,7 +44,7 @@ function NavBar() {
       </div>
       <div className={s.home}>
         <Link to="/home">
-          <img src={homeImg} alt="Home" width="41px" />
+          <img src={homeImg} alt="Home" width="53px" />
         </Link>
       </div>
     </div>
