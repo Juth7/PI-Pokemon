@@ -46,6 +46,7 @@ const getPokemonsDb = async () => {
       attack: e.attack,
       type: e.types.map((t) => t.name),
       img: e.img,
+      createdByUser: e.createdByUser,
     };
   });
 };
@@ -97,6 +98,7 @@ const getPokemonsName = async (name) => {
         type: n.map((t) => t.name),
         img: n.img,
         attack: n.attack,
+        createdByUser: n.createdByUser,
       };
     });
     return filtroName;
@@ -114,7 +116,7 @@ router.get("/", async (req, res) => {
     if (apiN) return res.send(apiN);
     const dbN = await getPokemonsName(name);
     if (dbN) return res.send(dbN);
-    return res.status(404).send("Pokemon Not Found");
+    return res.status(404).send({ msg: "Pokemon Not Found" });
   } catch (error) {
     console.log(error);
   }
@@ -152,6 +154,7 @@ const getIdDb = async (id) => {
     });
     return {
       id: findIdDb.id,
+      hp: findIdDb.hp,
       name: findIdDb.name,
       attack: findIdDb.attack,
       defense: findIdDb.defense,
@@ -160,6 +163,7 @@ const getIdDb = async (id) => {
       weight: findIdDb.weight,
       type: findIdDb.types.map((t) => t.name),
       img: findIdDb.img,
+      createdByUser: findIdDb.createdByUser,
     };
   } catch (error) {
     console.log(error);
@@ -173,24 +177,39 @@ router.get("/:id", async (req, res) => {
     if (fromApi) return res.send(fromApi);
     const fromDb = await getIdDb(id);
     if (fromDb) return res.send(fromDb);
-    return res.status(404).send("Pokemon Not Found");
+    return res.status(404).send({ msg: "Pokemon Not Found" });
   } catch (error) {
     console.log(error);
   }
 });
 
-router.post("", async (req, res) => {
+router.post("/", async (req, res) => {
   try {
-    const { name, hp, attack, defense, speed, height, weight, types } =
-      req.body;
-    const newPokemon = await Pokemon.create({
+    const {
       name,
       hp,
+      img,
       attack,
       defense,
       speed,
       height,
       weight,
+      types,
+      createdByUser,
+    } = req.body;
+    const newPokemon = await Pokemon.create({
+      name,
+      hp,
+      img:
+        img ||
+        "https://www.pngall.com/wp-content/uploads/4/Pokeball-Transparent.png",
+      // "https://gamegraduate.com/wp-content/uploads/2021/08/pokemon-1513925-removebg-preview.png",
+      attack,
+      defense,
+      speed,
+      height,
+      weight,
+      createdByUser,
     });
     const typePokemon = await Type.findAll({
       where: { name: types },
@@ -200,6 +219,20 @@ router.post("", async (req, res) => {
 
     // return res.status(200).send("Pokemon created succesfully!");
     return res.send(newPokemon);
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+router.delete("/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    if (id) {
+      await Pokemon.destroy({
+        where: { id: id },
+      });
+    }
+    return res.send({ msg: "Pokemon deleted" });
   } catch (error) {
     console.log(error);
   }

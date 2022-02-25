@@ -15,6 +15,7 @@ const initialState = {
   pokemons: [], //Es el que estoy renderizando
   detail: [],
   types: [],
+  isLoading: true,
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -24,6 +25,7 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         pokemons: action.payload,
         allPokemons: action.payload,
+        isLoading: action.loading,
       };
     case GET_NAMES:
       return {
@@ -60,9 +62,7 @@ const rootReducer = (state = initialState, action) => {
     case FILTER_CREATION:
       const allPokemonCreations = state.allPokemons;
       const filterCreation =
-        action.payload === "All"
-          ? allPokemonCreations
-          : action.payload === "CreatedByUser"
+        action.payload === "createdByUser"
           ? allPokemonCreations.filter((p) => p.createdByUser) //filtro por atributo de db
           : allPokemonCreations.filter((p) => !p.createdByUser);
       return {

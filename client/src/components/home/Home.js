@@ -8,17 +8,20 @@ import {
   orderByName,
   filterByType,
   filterByCreation,
+  cleanPokemons,
 } from "../../redux/actions";
 import PokemonCard from "../pokemonCard/PokemonCard";
 import Pagination from "../pagination/Pagination";
 import Loader from "../../img/Charizard.gif";
 import icon from "../../img/PokeBall.gif";
+// import notFound from "../../img/notFound.png";
 import NavBar from "../navBar/NavBar";
 import s from "./Home.module.css";
 
 export default function Home() {
   const dispatch = useDispatch();
   const pokemons = useSelector((state) => state.pokemons);
+  const isLoading = useSelector((state) => state.isLoading);
   const types = useSelector((state) => state.types);
   const [order, setOrder] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
@@ -36,7 +39,10 @@ export default function Home() {
     //Cuando inicio la página carga los pokemons
     dispatch(getPokemons());
     dispatch(getTypes());
-  }, [dispatch]);
+    return () => {
+      dispatch(cleanPokemons());
+    };
+  }, []);
 
   const handleClick = (e) => {
     e.preventDefault();
@@ -92,32 +98,14 @@ export default function Home() {
           </select>
           <select className={s.selector} onChange={handleCreationFilter}>
             <option value="All">Filter By Creation</option>
-            <option value="CreatedByUser">Created By User</option>
+            <option value="createdByUser">Created By User</option>
             <option value="Existing">Existing</option>
           </select>{" "}
         </div>
 
         {/* RENDERIZADO DE TODAS LAS CARD DE POKEMON */}
 
-        {currentPokemons.length ? (
-          typeof currentPokemons === "object" ? (
-            <div className={s.cards}>
-              {currentPokemons?.map((p) => (
-                <div className={s.card}>
-                  <PokemonCard
-                    key={p.id}
-                    name={p.name}
-                    img={p.img}
-                    type={p.type}
-                    id={p.id}
-                  />
-                </div>
-              ))}
-            </div>
-          ) : (
-            <p>Pokemon Not Found</p>
-          )
-        ) : (
+        {isLoading ? (
           <img
             className={s.loader}
             src={Loader}
@@ -125,6 +113,19 @@ export default function Home() {
             width="300px"
             height="300px"
           />
+        ) : (
+          <div className={s.cards}>
+            {currentPokemons?.map((p) => (
+              <div className={s.card} key={p.id}>
+                <PokemonCard
+                  name={p.name}
+                  img={p.img}
+                  type={p.type}
+                  id={p.id}
+                />
+              </div>
+            ))}
+          </div>
         )}
         <div className={s.ordering}>
           <select className={s.selector} onChange={handleOrder}>

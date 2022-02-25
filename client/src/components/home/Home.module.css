@@ -12,13 +12,13 @@ html body {
 .creation {
   display: flex;
   justify-content: center;
-  margin-top: 3rem;
-  margin-left: 4rem;
+  margin: 3rem 0 0 4rem;
 }
 .btnReload {
   background: transparent;
   border: none;
   width: fit-content;
+  cursor: pointer;
 }
 .btnCreate {
   align-self: center;
@@ -60,15 +60,13 @@ html body {
 
 .filters {
   flex-direction: column;
-  margin-left: 1rem;
-  margin-right: 1rem;
+  margin: 0 1rem;
   width: 15vw;
   height: 100%;
 }
 .ordering {
   flex-direction: column;
-  margin-right: 1rem;
-  margin-left: 1rem;
+  margin: 0 1rem;
   width: 15vw;
   height: 100%;
 }
@@ -92,15 +90,14 @@ html body {
 .cards {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: repeat(3, 1fr);
   grid-gap: 3rem;
   padding-bottom: 2%;
-  align-items: start;
 }
 
 .card {
-  width: 15rem;
-  height: 20rem;
+  padding-top: 1rem;
+  width: 15.5rem;
+  height: 19.5rem;
   border-radius: 10px;
   background: linear-gradient(
     180deg,
@@ -109,4 +106,33 @@ html body {
   );
   backdrop-filter: blur(5px);
   box-shadow: 0px 0px 8px 2px rgba(63, 18, 15, 0.774);
+}
+
+@media screen and (min-width: 500px) {
+  .cards {
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 1rem;
+    margin: 0 auto;
+  }
+  .card {
+    max-width: 12rem;
+    max-height: 16.5rem;
+  }
+}
+
+@media screen and (min-width: 950px) {
+  .cards {
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 1.5rem;
+    margin: 0 auto;
+  }
+  .card {
+    max-width: 12rem;
+    max-height: 16.5rem;
+  }
+}
+@media screen and (min-width: 1200px) {
+  .cards {
+    grid-template-columns: repeat(4, 1fr);
+  }
 }
