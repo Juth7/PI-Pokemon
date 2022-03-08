@@ -8,7 +8,6 @@ import {
   orderByName,
   filterByType,
   filterByCreation,
-  cleanPokemons,
 } from "../../redux/actions";
 import PokemonCard from "../pokemonCard/PokemonCard";
 import Pagination from "../pagination/Pagination";
@@ -39,10 +38,7 @@ export default function Home() {
     //Cuando inicio la página carga los pokemons
     dispatch(getPokemons());
     dispatch(getTypes());
-    return () => {
-      dispatch(cleanPokemons());
-    };
-  }, []);
+  }, [dispatch]);
 
   const handleClick = (e) => {
     e.preventDefault();
@@ -61,6 +57,7 @@ export default function Home() {
 
   const handleOrder = (e) => {
     dispatch(orderByName(e.target.value));
+    setCurrentPage(1);
     setOrder(`Orden: ${e.target.value}`);
   };
 
@@ -78,9 +75,9 @@ export default function Home() {
         <Link to="/create" type="button" className={s.btnCreate}>
           Create Pokémon
         </Link>
-        <button className={s.btnReload} onClick={handleClick}>
+        <button className={s.btnReload}>
           {/* Reload */}
-          <img src={icon} alt="Reload" width="45px" />
+          <img src={icon} alt="Reload" width="45px" onClick={handleClick} />
         </button>
       </div>
       {/* FILTROS Y ORDENAMIENTO  */}

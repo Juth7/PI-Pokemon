@@ -12,7 +12,11 @@ import {
 
 const initialState = {
   allPokemons: [],
-  pokemons: [], //Es el que estoy renderizando
+  pokemons: [],
+  alpha: [],
+  created: [],
+  oNames: [],
+  oAttack: [],
   detail: [],
   types: [],
   isLoading: true,
@@ -24,13 +28,17 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         pokemons: action.payload,
+        alpha: action.payload,
+        created: action.payload,
+        oNames: action.payload,
+        oAttack: action.payload,
         allPokemons: action.payload,
         isLoading: action.loading,
       };
     case GET_NAMES:
       return {
         ...state,
-        pokemons: [action.payload],
+        pokemons: action.payload,
       };
     case GET_DETAILS:
       console.log("reducer id", action.payload);
@@ -48,7 +56,7 @@ const rootReducer = (state = initialState, action) => {
         ...state,
       };
     case FILTER_TYPES:
-      const allPokemonTypes = state.allPokemons;
+      const allPokemonTypes = state.alpha;
       const filterType =
         action.payload === "All"
           ? allPokemonTypes
@@ -60,7 +68,7 @@ const rootReducer = (state = initialState, action) => {
         pokemons: filterType,
       };
     case FILTER_CREATION:
-      const allPokemonCreations = state.allPokemons;
+      const allPokemonCreations = state.created;
       const filterCreation =
         action.payload === "createdByUser"
           ? allPokemonCreations.filter((p) => p.createdByUser) //filtro por atributo de db
@@ -72,12 +80,12 @@ const rootReducer = (state = initialState, action) => {
     case ORDER_BY_NAME:
       const orderNames =
         action.payload === "All"
-          ? state.allPokemons
+          ? state.oNames
           : action.payload === "asc"
-          ? state.pokemons.sort((a, b) => {
+          ? state.oNames.sort((a, b) => {
               return a.name.toLowerCase().localeCompare(b.name.toLowerCase());
             })
-          : state.pokemons.sort((a, b) => {
+          : state.oNames.sort((a, b) => {
               return b.name.toLowerCase().localeCompare(a.name.toLowerCase());
             });
       return {
@@ -87,12 +95,12 @@ const rootReducer = (state = initialState, action) => {
     case ORDER_BY_ATTACK:
       const orderAttack =
         action.payload === "All"
-          ? state.allPokemons
+          ? state.oAttack
           : action.payload === "max"
-          ? state.pokemons.sort((a, b) => {
+          ? state.oAttack.sort((a, b) => {
               return b.attack - a.attack;
             })
-          : state.pokemons.sort((a, b) => {
+          : state.oAttack.sort((a, b) => {
               return a.attack - b.attack;
             });
       return {

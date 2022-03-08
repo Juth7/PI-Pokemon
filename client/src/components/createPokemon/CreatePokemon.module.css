@@ -27,6 +27,7 @@
   border-radius: 15px;
   border-color: rgb(187, 100, 85);
   color: rgba(243, 226, 181, 0.877);
+  margin-top: 1.5rem;
 }
 .fields::placeholder {
   color: rgba(243, 247, 212, 0.253);
@@ -59,4 +60,53 @@
   color: rgba(255, 235, 205, 0.616);
   width: fit-content;
   padding: 0.25rem 1rem;
+  cursor: pointer;
+}
+
+.errors {
+  color: rgb(247, 204, 184);
+  text-shadow: 0 0 0.18rem rgb(248, 66, 11);
+  font-style: italic;
+  font-size: 0.9rem;
+  margin: 0 5rem;
+}
+
+.stats {
+  -webkit-appearance: none;
+  border: none;
+  outline: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-color: transparent;
+
+  /* Añado mis propios estilos */
+  width: 10rem;
+  height: 0.55rem;
+  border-radius: 20px;
+  margin: 1rem;
+}
+
+.stats::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 1rem;
+  height: 1rem;
+  border-radius: 25rem;
+  background-color: rgb(247, 66, 66);
+  margin: -0.2rem 0 0 -0.1rem;
+}
+
+.stats::-moz-range-thumb {
+  -moz-appearance: none;
+  width: 1rem;
+  height: 1rem;
+  border-radius: 25rem;
+  background-color: rgb(247, 66, 66);
+  margin: -0.2rem 0 0 -0.1rem;
+}
+.stats::-webkit-slider-runnable-track {
+  -webkit-appearance: none;
+  background-color: rgba(248, 146, 106, 0.349);
+  height: 0.6rem;
+  border: 1px solid rgb(163, 19, 19);
+  border-radius: 3rem;
 }

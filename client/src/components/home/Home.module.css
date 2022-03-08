@@ -22,12 +22,12 @@ html body {
 }
 .btnCreate {
   align-self: center;
-  font-family: Courier Prime;
+  font-family: "Courier New", Courier, monospace;
   font-weight: bold;
   color: rgb(204, 176, 176);
   width: fit-content;
   padding: 0.75rem;
-  text-transform: uppercase;
+  text-transform: capitalize;
   text-decoration: none;
   background: linear-gradient(
     180deg,

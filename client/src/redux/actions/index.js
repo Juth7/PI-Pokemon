@@ -24,14 +24,14 @@ export const getPokemons = () => {
 };
 
 export const getNames = (name) => {
+  console.log("name act", name);
   return async (dispatch) => {
     try {
       const json = await axios(`http://localhost:3001/pokemons?name=${name}`);
       // console.log("names act", json.data);
       return dispatch({ type: GET_NAMES, payload: json.data });
     } catch (error) {
-      alert("Pokemon Not Found");
-      // console.log(error);
+      console.log(error);
     }
   };
 };
@@ -76,19 +76,13 @@ export const addPokemon = (payload) => {
 export const deletePokemon = (id) => {
   return async (dispatch) => {
     try {
-      return await axios
-        .delete(`http://localhost:3001/pokemons/${id}`)
-        .then(dispatch({ type: "DELETE_POKEMON" }));
+      const json = await axios.delete(
+        `http://localhost:3001/pokemons/delete/${id}`
+      );
+      return dispatch({ type: "DELETE_POKEMON", payload: json.data });
     } catch (error) {
       console.log(error);
     }
-  };
-};
-
-export const cleanPokemons = () => {
-  return {
-    type: GET_POKEMONS,
-    payload: [],
   };
 };
 

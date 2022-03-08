@@ -67,13 +67,15 @@ const getApiName = async (name) => {
   try {
     const apiName = await axios.get(`http://pokeapi.co/api/v2/pokemon/${name}`);
     const names = apiName.data;
-    return {
-      id: names.id,
-      name: names.name,
-      type: names.types.map((t) => t.type.name),
-      img: names.sprites.other.home.front_default,
-      attack: names.stats[1].base_stat,
-    };
+    return [
+      {
+        id: names.id,
+        name: names.name,
+        type: names.types.map((t) => t.type.name),
+        img: names.sprites.other.home.front_default,
+        attack: names.stats[1].base_stat,
+      },
+    ];
   } catch (error) {
     console.log(error);
   }
@@ -95,7 +97,7 @@ const getPokemonsName = async (name) => {
       return {
         id: n.id,
         name: n.name,
-        type: n.map((t) => t.name),
+        type: n.types.map((t) => t.name),
         img: n.img,
         attack: n.attack,
         createdByUser: n.createdByUser,
@@ -224,9 +226,9 @@ router.post("/", async (req, res) => {
   }
 });
 
-router.delete("/:id", async (req, res) => {
+router.delete("/delete/:id", async (req, res) => {
+  const { id } = req.params;
   try {
-    const { id } = req.params;
     if (id) {
       await Pokemon.destroy({
         where: { id: id },

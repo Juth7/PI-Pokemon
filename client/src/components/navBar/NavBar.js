@@ -22,7 +22,13 @@ function NavBar() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    search ? dispatch(getNames(name)) : history.push("/home");
+    if (search) {
+      // history.push("/home");
+      dispatch(getNames(name));
+    } else {
+      alert("Pokemon Not Found");
+      history.push("/home");
+    }
     setName("");
     // console.log("lin 47", name);
   };

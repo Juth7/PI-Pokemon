@@ -18,15 +18,16 @@ export default function CreatePokemon() {
     return () => {
       dispatch(cleanDetail());
     };
-  }, []);
+  }, [id, dispatch]);
 
-  const handleDelete = (e, id) => {
+  const handleDelete = (e) => {
     e.preventDefault();
     const sure = window.confirm(
       "Are you sure you want to delete your pokemon?"
     );
     if (sure) {
-      dispatch(deletePokemon(id));
+      dispatch(deletePokemon(pokemonDetail.id));
+      alert("Pokemon Deleted Successfully!");
       history.push("/home");
     }
   };

@@ -35,7 +35,7 @@ export default function CreatePokemon() {
   const validate = (input) => {
     let errors = {};
     if (
-      !input.name ||
+      !input.name.length ||
       !validateName.test(input.name) ||
       input.name.length < 3
     ) {
@@ -80,15 +80,11 @@ export default function CreatePokemon() {
   };
 
   const handleSelect = (e) => {
-    if (input.types.length < 2) {
-      setInput({
-        ...input,
-        types: [...input.types, e.target.value],
-      });
-      e.target.value = "Select type";
-    } else {
-      alert("More than 2 types are not allowed");
-    }
+    setInput({
+      ...input,
+      types: [...input.types, e.target.value],
+    });
+    e.target.value = "Select type";
   };
 
   const handleSubmit = (e) => {
@@ -96,14 +92,7 @@ export default function CreatePokemon() {
 
     if (
       Object.keys(errors).length === 0 &&
-      // !errors.name &&
-      // !errors.hp &&
-      // !errors.attack &&
-      // !errors.defense &&
-      // !errors.speed &&
-      // !errors.height &&
-      // !errors.weight &&
-      input.name.length &&
+      input.types.length > 0 &&
       input.types.length <= 2
     ) {
       dispatch(addPokemon(input));
@@ -158,6 +147,7 @@ export default function CreatePokemon() {
                   type="text"
                   value={input.name.trim().toLowerCase()}
                   autoComplete="off"
+                  maxLength="20"
                   name="name"
                   onChange={(e) => {
                     handleChange(e);
@@ -165,11 +155,12 @@ export default function CreatePokemon() {
                   placeholder=" Name..."
                   className={s.fields}
                 />
-                <p>{errors.name}</p>
+                <p className={s.errors}>{errors.name}</p>
                 <label htmlFor="img">Image: </label>
                 <input
                   type="url"
                   autoComplete="off"
+                  maxLength="255"
                   value={input.img}
                   name="img"
                   onChange={(e) => {
@@ -178,7 +169,8 @@ export default function CreatePokemon() {
                   placeholder=" URL Image..."
                   className={s.fields}
                 />
-                <p> </p>
+                <br />
+                <br />
                 <label htmlFor="hp">HP: </label>{" "}
                 <input
                   type="range"
@@ -188,10 +180,10 @@ export default function CreatePokemon() {
                     handleChange(e);
                   }}
                   placeholder=" HP..."
-                  className={s.fields}
+                  className={s.stats}
                 />
                 {input.hp}
-                <p>{errors.hp}</p>
+                <p className={s.errors}>{errors.hp}</p>
                 <label htmlFor="attack">Attack: </label>{" "}
                 <input
                   type="range"
@@ -201,10 +193,10 @@ export default function CreatePokemon() {
                     handleChange(e);
                   }}
                   placeholder=" Attack..."
-                  className={s.fields}
+                  className={s.stats}
                 />
                 {input.attack}
-                <p>{errors.attack}</p>
+                <p className={s.errors}>{errors.attack}</p>
                 <label htmlFor="defense">Defense: </label>{" "}
                 <input
                   type="range"
@@ -214,10 +206,10 @@ export default function CreatePokemon() {
                     handleChange(e);
                   }}
                   placeholder=" Defense..."
-                  className={s.fields}
+                  className={s.stats}
                 />
                 {input.defense}
-                <p>{errors.defense}</p>
+                <p className={s.errors}>{errors.defense}</p>
               </div>
               <div>
                 <label htmlFor="speed">Speed: </label>{" "}
@@ -229,10 +221,10 @@ export default function CreatePokemon() {
                     handleChange(e);
                   }}
                   placeholder=" Speed..."
-                  className={s.fields}
+                  className={s.stats}
                 />
                 {input.speed}
-                <p>{errors.speed}</p>
+                <p className={s.errors}>{errors.speed}</p>
                 <label htmlFor="height">Height: </label>{" "}
                 <input
                   type="range"
@@ -242,10 +234,10 @@ export default function CreatePokemon() {
                     handleChange(e);
                   }}
                   placeholder=" Height..."
-                  className={s.fields}
+                  className={s.stats}
                 />
                 {input.height}
-                <p>{errors.height}</p>
+                <p className={s.errors}>{errors.height}</p>
                 <label htmlFor="weight">Weight: </label>
                 <input
                   type="range"
@@ -255,10 +247,10 @@ export default function CreatePokemon() {
                     handleChange(e);
                   }}
                   placeholder=" Weight..."
-                  className={s.fields}
+                  className={s.stats}
                 />
                 {input.weight}
-                <p>{errors.weight}</p>
+                <p className={s.errors}>{errors.weight}</p>
               </div>
             </div>
             <div>
@@ -277,7 +269,6 @@ export default function CreatePokemon() {
                   );
                 })}
               </select>
-              <p>{errors.types}</p>
               {
                 input.types.map((e) => {
                   return (
@@ -306,5 +297,3 @@ export default function CreatePokemon() {
     </>
   );
 }
-// let validateUrl = /^https?:\/\/(?!\/)/i;
-// let validateUrl = /\.(gif|jpeg|jpg|png)$/i;
