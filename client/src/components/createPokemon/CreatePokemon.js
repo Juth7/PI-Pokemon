@@ -31,6 +31,7 @@ export default function CreatePokemon() {
   });
 
   let validateName = /^[a-zA-Z\s]+$/;
+  let validateUrl = /(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|gif|png)/;
 
   const validate = (input) => {
     let errors = {};
@@ -44,6 +45,9 @@ export default function CreatePokemon() {
     }
     if (pokemons.find((p) => p.name === input.name)) {
       errors.name = "This pokemon already exists!";
+    }
+    if (input.img && !validateUrl.test(input.img)) {
+      errors.img = "This is not a valid URL";
     }
     if (!input.hp || input.hp < 1) {
       errors.hp = "Number required. Must be a number between 1-255";
@@ -69,12 +73,12 @@ export default function CreatePokemon() {
   const handleChange = (e) => {
     setInput({
       ...input,
-      [e.target.name]: e.target.value,
+      [e.target.name]: e.target.value.trim().toLowerCase(),
     });
     setErrors(
       validate({
         ...input,
-        [e.target.name]: e.target.value,
+        [e.target.name]: e.target.value.trim().toLowerCase(),
       })
     );
   };
@@ -145,7 +149,7 @@ export default function CreatePokemon() {
                 <label htmlFor="name">Name: </label>
                 <input
                   type="text"
-                  value={input.name.trim().toLowerCase()}
+                  value={input.name}
                   autoComplete="off"
                   maxLength="20"
                   name="name"
@@ -169,7 +173,7 @@ export default function CreatePokemon() {
                   placeholder=" URL Image..."
                   className={s.fields}
                 />
-                <br />
+                <p className={s.errors}>{errors.img}</p>
                 <br />
                 <label htmlFor="hp">HP: </label>{" "}
                 <input
@@ -297,3 +301,4 @@ export default function CreatePokemon() {
     </>
   );
 }
+// let validateUrl = /(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|gif|png)/;

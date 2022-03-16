@@ -3,7 +3,7 @@ import { useParams, useHistory } from "react-router-dom";
 import { cleanDetail, getPokemonId, deletePokemon } from "../../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 import NavBar from "../navBar/NavBar";
-import Loader from "../../img/Loader1.gif";
+import Loader from "../../img/Charizard.gif";
 import s from "./PokemonDetail.module.css";
 
 export default function CreatePokemon() {
@@ -35,10 +35,8 @@ export default function CreatePokemon() {
   return (
     <>
       <NavBar />
-      <div className={s.detailCard}>
-        {getPokemonId.length < 0 ? (
-          <img src={Loader} alt="" width="120px" height="120px" />
-        ) : (
+      {pokemonDetail.name ? (
+        <div className={s.detailCard}>
           <div className={s.name}>
             <h2>{pokemonDetail.name}</h2>
             <img src={pokemonDetail.img} alt="" width="300px" height="300px" />
@@ -119,8 +117,16 @@ export default function CreatePokemon() {
               </button>
             )}
           </div>
-        )}
-      </div>
+        </div>
+      ) : (
+        <img
+          src={Loader}
+          alt=""
+          width="300px"
+          height="300px"
+          className={s.loader}
+        />
+      )}
     </>
   );
 }

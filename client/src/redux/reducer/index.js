@@ -13,10 +13,6 @@ import {
 const initialState = {
   allPokemons: [],
   pokemons: [],
-  alpha: [],
-  created: [],
-  oNames: [],
-  oAttack: [],
   detail: [],
   types: [],
   isLoading: true,
@@ -25,13 +21,10 @@ const initialState = {
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_POKEMONS:
+      // console.log(action.payload);
       return {
         ...state,
         pokemons: action.payload,
-        alpha: action.payload,
-        created: action.payload,
-        oNames: action.payload,
-        oAttack: action.payload,
         allPokemons: action.payload,
         isLoading: action.loading,
       };
@@ -56,7 +49,7 @@ const rootReducer = (state = initialState, action) => {
         ...state,
       };
     case FILTER_TYPES:
-      const allPokemonTypes = state.alpha;
+      const allPokemonTypes = state.allPokemons;
       const filterType =
         action.payload === "All"
           ? allPokemonTypes
@@ -68,7 +61,7 @@ const rootReducer = (state = initialState, action) => {
         pokemons: filterType,
       };
     case FILTER_CREATION:
-      const allPokemonCreations = state.created;
+      const allPokemonCreations = state.allPokemons;
       const filterCreation =
         action.payload === "createdByUser"
           ? allPokemonCreations.filter((p) => p.createdByUser) //filtro por atributo de db
@@ -80,12 +73,12 @@ const rootReducer = (state = initialState, action) => {
     case ORDER_BY_NAME:
       const orderNames =
         action.payload === "All"
-          ? state.oNames
+          ? state.allPokemons
           : action.payload === "asc"
-          ? state.oNames.sort((a, b) => {
+          ? state.pokemons.sort((a, b) => {
               return a.name.toLowerCase().localeCompare(b.name.toLowerCase());
             })
-          : state.oNames.sort((a, b) => {
+          : state.pokemons.sort((a, b) => {
               return b.name.toLowerCase().localeCompare(a.name.toLowerCase());
             });
       return {
@@ -95,12 +88,12 @@ const rootReducer = (state = initialState, action) => {
     case ORDER_BY_ATTACK:
       const orderAttack =
         action.payload === "All"
-          ? state.oAttack
+          ? state.allPokemons
           : action.payload === "max"
-          ? state.oAttack.sort((a, b) => {
+          ? state.pokemons.sort((a, b) => {
               return b.attack - a.attack;
             })
-          : state.oAttack.sort((a, b) => {
+          : state.pokemons.sort((a, b) => {
               return a.attack - b.attack;
             });
       return {

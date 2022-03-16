@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Link, useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 import Logo from "../../img/Logo.png";
 import homeImg from "../../img/PokeBlue.png";
 import { getNames } from "../../redux/actions";
@@ -8,9 +8,7 @@ import s from "./NavBar.module.css";
 
 function NavBar() {
   const dispatch = useDispatch();
-  const history = useHistory();
   const [name, setName] = useState("");
-  const pokemons = useSelector((state) => state.pokemons);
 
   const handleName = (e) => {
     e.preventDefault();
@@ -18,18 +16,14 @@ function NavBar() {
     // console.log("lin 42", e.target.value);
   };
 
-  const search = pokemons.find((p) => p.name === name);
-
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (search) {
-      // history.push("/home");
+    if (name) {
       dispatch(getNames(name));
-    } else {
-      alert("Pokemon Not Found");
-      history.push("/home");
+      setName("");
     }
-    setName("");
+    alert("Pokemon Not Found");
+
     // console.log("lin 47", name);
   };
 

@@ -1,3 +1,6 @@
+.img {
+  filter: drop-shadow(0 0 10px rgba(160, 57, 26, 0.979));
+}
 .cardDet {
   text-decoration: none;
   font-size: medium;

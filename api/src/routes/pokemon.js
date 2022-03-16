@@ -8,7 +8,7 @@ const getPokemonsApi = async () => {
   try {
     const pokeApi = await axios.get("http://pokeapi.co/api/v2/pokemon");
     const next = await axios.get(pokeApi.data.next);
-    const arr40 = pokeApi.data.results.concat(next.data.results).slice(1, 9);
+    const arr40 = pokeApi.data.results.concat(next.data.results);
 
     const data40 = arr40.map(async (d) => await axios.get(d.url)); //array promesas
     let poke40 = await Promise.all(data40).then((promise) => {
@@ -20,6 +20,7 @@ const getPokemonsApi = async () => {
         type: p.types.map((t) => t.type.name),
         img: p.sprites.other.home.front_default,
       }));
+      // console.log("pokemons", pokemons);
       return pokemons;
     });
     return poke40;
@@ -57,6 +58,7 @@ const allPokemons = async () => {
     const apiP = await getPokemonsApi();
     const dataB = await getPokemonsDb();
     const pokeAll = [...apiP, ...dataB];
+    // console.log("api", apiP);
     return pokeAll;
   } catch (error) {
     console.log(error);
@@ -84,7 +86,7 @@ const getApiName = async (name) => {
 const getPokemonsName = async (name) => {
   try {
     const dbNames = await Pokemon.findAll({
-      where: { name: name },
+      where: { name: { [Op.iLike]: "%" + name + "%" } },
       include: {
         model: Type,
         attributes: ["name"],

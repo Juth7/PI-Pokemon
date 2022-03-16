@@ -15,6 +15,7 @@ export const getPokemons = () => {
       await fetch("http://localhost:3001/pokemons")
         .then((response) => response.json())
         .then(async (data) => {
+          // console.log(data);
           await dispatch({ type: GET_POKEMONS, payload: data, loading: false });
         });
     } catch (error) {
@@ -32,6 +33,7 @@ export const getNames = (name) => {
       return dispatch({ type: GET_NAMES, payload: json.data });
     } catch (error) {
       console.log(error);
+      // alert("Pokemon Not Found");
     }
   };
 };
