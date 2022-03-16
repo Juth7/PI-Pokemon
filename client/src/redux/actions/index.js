@@ -12,7 +12,7 @@ export const ORDER_BY_ATTACK = "ORDER_BY_ATTACK";
 export const getPokemons = () => {
   return async (dispatch) => {
     try {
-      await fetch("http://localhost:3001/pokemons")
+      await fetch("https://juth-poke.herokuapp.com/pokemons")
         .then((response) => response.json())
         .then(async (data) => {
           // console.log(data);
@@ -28,7 +28,7 @@ export const getNames = (name) => {
   console.log("name act", name);
   return async (dispatch) => {
     try {
-      const json = await axios(`http://localhost:3001/pokemons?name=${name}`);
+      const json = await axios(`https://juth-poke.herokuapp.com/pokemons?name=${name}`);
       // console.log("names act", json.data);
       return dispatch({ type: GET_NAMES, payload: json.data });
     } catch (error) {
@@ -41,7 +41,7 @@ export const getNames = (name) => {
 export const getPokemonId = (id) => {
   return async (dispatch) => {
     try {
-      const json = await axios.get(`http://localhost:3001/pokemons/${id}`);
+      const json = await axios.get(`https://juth-poke.herokuapp.com/pokemons/${id}`);
       console.log("action id", json.data);
       return dispatch({ type: GET_DETAILS, payload: json.data });
     } catch (error) {
@@ -53,7 +53,7 @@ export const getPokemonId = (id) => {
 export const getTypes = () => {
   return async (dispatch) => {
     try {
-      const json = await axios.get("http://localhost:3001/types");
+      const json = await axios.get("https://juth-poke.herokuapp.com/types");
       return dispatch({ type: GET_TYPES, payload: json.data });
     } catch (error) {
       console.log(error);
@@ -65,7 +65,7 @@ export const addPokemon = (payload) => {
   return async (dispatch) => {
     try {
       const response = await axios.post(
-        "http://localhost:3001/pokemons",
+        "https://juth-poke.herokuapp.com/pokemons",
         payload
       );
       return dispatch({ type: POST_POKEMONS, payload: response });
@@ -79,7 +79,7 @@ export const deletePokemon = (id) => {
   return async (dispatch) => {
     try {
       const json = await axios.delete(
-        `http://localhost:3001/pokemons/delete/${id}`
+        `https://juth-poke.herokuapp.com/pokemons/delete/${id}`
       );
       return dispatch({ type: "DELETE_POKEMON", payload: json.data });
     } catch (error) {
