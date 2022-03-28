@@ -22,7 +22,7 @@ function NavBar() {
       dispatch(getNames(name));
       setName("");
     }
-    alert("Pokemon Not Found");
+//     alert("Pokemon Not Found");
 
     // console.log("lin 47", name);
   };
